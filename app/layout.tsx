@@ -12,7 +12,7 @@ const syncopate = Syncopate({
 
 export const metadata: Metadata = {
 	title: "Raspberry Productions",
-	description: "EVENTS. ELEVATED.",
+	description: "IRL, done right",
 };
 
 export default function RootLayout({
