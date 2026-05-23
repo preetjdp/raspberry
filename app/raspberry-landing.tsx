@@ -50,12 +50,6 @@ export function RaspberryLanding() {
 				size={0.6}
 				type="classic"
 			/>
-			{/* <h1 className="absolute left-[27px] top-[494px] flex w-max justify-end text-right text-[29px] leading-[34px] font-normal tracking-[0.202em] text-[#f4f4f4] md:left-[823px] md:top-[69px] md:text-[46px] md:leading-[56px]">
-				Raspberry
-			</h1>
-			<h2 className="absolute left-[104px] top-[528px] flex w-max justify-end text-right text-[29px] leading-[34px] font-normal text-[#f4f4f4] md:left-[823px] md:top-[125px] md:text-[46px] md:leading-[56px]">
-				Productions
-			</h2> */}
 		</main>
 	);
 }
