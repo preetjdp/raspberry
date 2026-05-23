@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Syncopate } from "next/font/google";
 
 import { BaseUIProvider } from "./base-ui-provider";
 import "./globals.css";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
+const syncopate = Syncopate({
+	variable: "--font-syncopate",
+	weight: ["400", "700"],
 	subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-	title: "Raspberry",
-	description:
-		"A Next.js app with Paper Shaders configured for GPU backgrounds.",
+	title: "Raspberry Productions",
+	description: "EVENTS. ELEVATED.",
 };
 
 export default function RootLayout({
@@ -29,7 +24,7 @@ export default function RootLayout({
 		<html
 			dir="ltr"
 			lang="en"
-			className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+			className={`${syncopate.variable} h-full antialiased`}
 		>
 			<body className="min-h-full flex flex-col">
 				<BaseUIProvider direction="ltr">
