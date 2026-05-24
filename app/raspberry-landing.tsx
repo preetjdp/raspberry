@@ -3,10 +3,19 @@
 import { Dithering, HalftoneDots } from "@paper-design/shaders-react";
 import { Mail } from "lucide-react";
 import { useEffect, useState } from "react";
+import { preload } from "react-dom";
 
 import { Folder } from "@/app/_components/folder";
 
+const RASPBERRY_LOGO_SRC = "/raspberry.svg";
+
 export function RaspberryLanding() {
+	preload(RASPBERRY_LOGO_SRC, {
+		as: "image",
+		fetchPriority: "high",
+		type: "image/svg+xml",
+	});
+
 	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
 	useEffect(() => {
@@ -45,7 +54,7 @@ export function RaspberryLanding() {
 				fit="contain"
 				grainSize={0.5}
 				grid="hex"
-				image="/raspberry.svg"
+				image={RASPBERRY_LOGO_SRC}
 				maxPixelCount={2_500_000}
 				minPixelRatio={1}
 				originalColors
