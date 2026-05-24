@@ -1,7 +1,10 @@
 "use client";
 
 import { Dithering, HalftoneDots } from "@paper-design/shaders-react";
+import { Mail } from "lucide-react";
 import { useEffect, useState } from "react";
+
+import { Folder } from "@/app/_components/folder";
 
 export function RaspberryLanding() {
 	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -65,43 +68,22 @@ export function RaspberryLanding() {
 							<br />
 							Productions
 						</h1>
-						<a
-							aria-label="Contact Raspberry Productions by email"
-							className="group flex w-fit flex-col items-center gap-[5px] text-[#a1b3c3] transition duration-200 hover:text-[#f4f4f4] focus-visible:text-[#f4f4f4]"
-							href="mailto:rasp@berry.productions"
-						>
-							<svg
-								aria-hidden="true"
-								className="h-[72px] w-[72px] shrink-0 min-[320px]:h-[86px] min-[320px]:w-[86px] sm:h-[104px] sm:w-[104px] xl:h-[120px] xl:w-[120px]"
-								fill="none"
-								viewBox="0 0 72 72"
-								xmlns="http://www.w3.org/2000/svg"
+						<div className="flex flex-wrap items-start justify-center gap-x-5 gap-y-5 sm:gap-x-8 lg:justify-start xl:gap-x-5">
+							<a
+								aria-label="Contact Raspberry Productions by email"
+								className="group flex w-fit flex-col items-center gap-[5px] text-[#a1b3c3] transition duration-200 hover:text-[#f4f4f4] focus-visible:text-[#f4f4f4]"
+								href="mailto:rasp@berry.productions"
 							>
-								<path
-									className="fill-current"
-									d="M43.98 25.695H28.02V63.268H43.98V25.695Z"
+								<Folder
+									colorScheme="material-porcelain"
+									motion="tilt"
+									iconTreatment="engraved"
+									icon={Mail}
+									iconSize={24}
+									label="Contact"
 								/>
-								<path
-									className="fill-current"
-									d="M49.12 61.547H22.887V63.503H49.12V61.547Z"
-								/>
-								<path
-									className="fill-current"
-									d="M43.984 25.695H22.887V27.651H43.984V25.695Z"
-								/>
-								<path
-									className="fill-current"
-									d="M36.002 20.637C40.41 20.637 43.984 17.063 43.984 12.654C43.984 8.246 40.41 4.672 36.002 4.672C31.593 4.672 28.02 8.246 28.02 12.654C28.02 17.063 31.593 20.637 36.002 20.637Z"
-								/>
-								<path
-									className="stroke-current"
-									d="M36 71.039C55.349 71.039 71.035 55.353 71.035 36.004C71.035 16.655 55.349 0.969 36 0.969C16.651 0.969 0.965 16.655 0.965 36.004C0.965 55.353 16.651 71.039 36 71.039Z"
-									strokeMiterlimit="10"
-									strokeWidth="1.934"
-								/>
-							</svg>
-							<span className="text-xs font-bold leading-4">Contact</span>
-						</a>
+							</a>
+						</div>
 					</section>
 				</div>
 			</div>

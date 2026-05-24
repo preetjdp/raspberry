@@ -23,72 +23,167 @@ body {
 	isolation: isolate;
 }
 
-.folder-frame {
+.folder {
 	--folder-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
-	--folder-motion-fast: 180ms;
-	--folder-motion-settle: 240ms;
+	--folder-motion-fast: 210ms;
+	--folder-motion-settle: 320ms;
+	--folder-svg-hover: none;
+	--folder-back-hover: none;
+	--folder-face-hover: none;
+	--folder-icon-hover: none;
+	--folder-ground-hover: none;
+	--folder-ground-hover-opacity: 1;
+	--folder-gloss-hover: none;
+	--folder-gloss-hover-opacity: 1;
 
 	transform: translateZ(0);
 }
 
-.folder-frame__svg {
+.folder__svg {
 	transform-origin: 50% 82%;
-	transition: transform var(--folder-motion-fast) var(--folder-motion-ease);
+	transition: transform var(--folder-motion-settle) var(--folder-motion-ease);
 	will-change: transform;
 }
 
-.folder-frame__back,
-.folder-frame__face {
+.folder__back,
+.folder__face,
+.folder__icon-wrap,
+.folder__gloss {
 	transform-box: fill-box;
 	transform-origin: 50% 50%;
 	transition: transform var(--folder-motion-settle) var(--folder-motion-ease);
 	will-change: transform;
 }
 
-.folder-frame__label {
+.folder__gloss {
+	transition:
+		opacity var(--folder-motion-settle) ease,
+		transform var(--folder-motion-settle) var(--folder-motion-ease);
+}
+
+.folder__icon {
+	paint-order: stroke;
+}
+
+.folder__ground {
+	transform-box: fill-box;
+	transform-origin: 50% 50%;
+	transition:
+		opacity var(--folder-motion-fast) ease,
+		transform var(--folder-motion-settle) var(--folder-motion-ease);
+}
+
+.folder__label {
 	transition: color var(--folder-motion-fast) ease;
 }
 
-.folder-frame[data-motion="lift"]:is(:hover, :focus-within) .folder-frame__svg,
-.folder-motion-card:is(:hover, :focus-within)
-	.folder-frame[data-motion="lift"]
-	.folder-frame__svg {
-	transform: translateY(-8px) scale(1.035);
+.folder:is(:hover, :focus-within) .folder__svg,
+.folder-demo-card:is(:hover, :focus-within) .folder__svg {
+	transform: var(--folder-svg-hover);
 }
 
-.folder-frame[data-motion="peek"]:is(:hover, :focus-within) .folder-frame__svg,
-.folder-motion-card:is(:hover, :focus-within)
-	.folder-frame[data-motion="peek"]
-	.folder-frame__svg {
-	transform: translateY(-5px);
+.folder:is(:hover, :focus-within) .folder__back,
+.folder-demo-card:is(:hover, :focus-within) .folder__back {
+	transform: var(--folder-back-hover);
 }
 
-.folder-frame[data-motion="peek"]:is(:hover, :focus-within) .folder-frame__back,
-.folder-motion-card:is(:hover, :focus-within)
-	.folder-frame[data-motion="peek"]
-	.folder-frame__back {
-	transform: translateY(-7px) rotate(-2deg);
+.folder:is(:hover, :focus-within) .folder__face,
+.folder-demo-card:is(:hover, :focus-within) .folder__face {
+	transform: var(--folder-face-hover);
 }
 
-.folder-frame[data-motion="peek"]:is(:hover, :focus-within) .folder-frame__face,
-.folder-motion-card:is(:hover, :focus-within)
-	.folder-frame[data-motion="peek"]
-	.folder-frame__face {
-	transform: translateY(2px);
+.folder:is(:hover, :focus-within) .folder__icon-wrap,
+.folder-demo-card:is(:hover, :focus-within) .folder__icon-wrap {
+	transform: var(--folder-icon-hover);
 }
 
-.folder-frame[data-motion="tilt"]:is(:hover, :focus-within) .folder-frame__svg,
-.folder-motion-card:is(:hover, :focus-within)
-	.folder-frame[data-motion="tilt"]
-	.folder-frame__svg {
-	transform: translateY(-5px) rotate(-4deg);
+.folder:is(:hover, :focus-within) .folder__ground,
+.folder-demo-card:is(:hover, :focus-within) .folder__ground {
+	opacity: var(--folder-ground-hover-opacity);
+	transform: var(--folder-ground-hover);
 }
 
-.folder-frame[data-motion="tilt"]:is(:hover, :focus-within) .folder-frame__face,
-.folder-motion-card:is(:hover, :focus-within)
-	.folder-frame[data-motion="tilt"]
-	.folder-frame__face {
-	transform: translateX(2px) translateY(1px);
+.folder:is(:hover, :focus-within) .folder__gloss,
+.folder-demo-card:is(:hover, :focus-within) .folder__gloss {
+	opacity: var(--folder-gloss-hover-opacity);
+	transform: var(--folder-gloss-hover);
+}
+
+.folder-demo-card {
+	transition:
+		background-color var(--folder-motion-fast) ease,
+		border-color var(--folder-motion-fast) ease,
+		box-shadow var(--folder-motion-fast) ease,
+		transform var(--folder-motion-fast) var(--folder-motion-ease);
+}
+
+.folder-demo-card:is(:hover, :focus-within) {
+	background-color: #0a0e11;
+	border-color: rgb(184 202 217 / 0.28);
+	box-shadow: 0 22px 66px rgb(0 0 0 / 0.28);
+	transform: translateY(-2px);
+}
+
+.folder-builder-option {
+	transition:
+		background-color var(--folder-motion-fast) ease,
+		border-color var(--folder-motion-fast) ease,
+		box-shadow var(--folder-motion-fast) ease,
+		color var(--folder-motion-fast) ease,
+		transform var(--folder-motion-fast) var(--folder-motion-ease);
+}
+
+.folder-builder-option:not(:disabled):is(:hover, :focus-visible) {
+	background-color: #0a0f13;
+	border-color: color-mix(
+		in srgb,
+		var(--folder-option-accent) 42%,
+		rgb(216 237 249 / 0.5)
+	);
+	transform: translateY(-1px);
+}
+
+.folder-builder-option.is-active {
+	background:
+		linear-gradient(
+			145deg,
+			color-mix(in srgb, var(--folder-option-accent) 18%, transparent),
+			rgb(8 13 17 / 0.94) 54%
+		),
+		#0a0f13;
+	border-color: color-mix(
+		in srgb,
+		var(--folder-option-accent) 56%,
+		rgb(216 237 249 / 0.72)
+	);
+	box-shadow:
+		inset 0 1px 0 rgb(255 255 255 / 0.08),
+		0 0 0 1px color-mix(in srgb, var(--folder-option-accent) 18%, transparent);
+}
+
+.folder-builder-preview {
+	animation: folder-builder-preview-in 460ms var(--folder-motion-ease) both;
+	transform-origin: 50% 82%;
+}
+
+@keyframes folder-builder-preview-in {
+	0% {
+		filter: blur(5px);
+		opacity: 0;
+		transform: translateY(10px) scale(0.96);
+	}
+
+	65% {
+		filter: blur(0);
+		opacity: 1;
+		transform: translateY(-2px) scale(1.012);
+	}
+
+	100% {
+		filter: blur(0);
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
 }
 
 .base-ui-disable-scrollbar {
@@ -105,10 +200,18 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.folder-frame__svg,
-	.folder-frame__back,
-	.folder-frame__face,
-	.folder-frame__label {
+	.folder__svg,
+	.folder__back,
+	.folder__face,
+	.folder__gloss,
+	.folder__ground,
+	.folder__icon-wrap,
+	.folder__label,
+	.folder-builder-option {
 		transition-duration: 1ms;
+	}
+
+	.folder-builder-preview {
+		animation: none;
 	}
 }
