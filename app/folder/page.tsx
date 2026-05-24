@@ -1,24 +1,44 @@
 import type { Metadata } from "next";
 
-import { FolderFrame } from "@/app/_components/folder-frame";
+import {
+	FolderFrame,
+	type FolderFrameMotion,
+} from "@/app/_components/folder-frame";
 
 export const metadata: Metadata = {
 	title: "Folder Frame | Raspberry Productions",
 	description: "A React showcase for the Paper Folder frame.",
 };
 
-const folderVariants = [
+const motionOptions: Array<{
+	label: string;
+	meta: string;
+	motion: FolderFrameMotion;
+	size: number;
+}> = [
 	{
-		label: "Projects",
-		size: 88,
+		label: "Lift",
+		meta: "surface",
+		motion: "lift",
+		size: 82,
 	},
 	{
-		label: "Drafts",
-		size: 76,
+		label: "Peek",
+		meta: "tab + front",
+		motion: "peek",
+		size: 82,
 	},
 	{
-		label: "Archive",
-		size: 64,
+		label: "Tilt",
+		meta: "rotation",
+		motion: "tilt",
+		size: 82,
+	},
+	{
+		label: "Glow",
+		meta: "shadow",
+		motion: "glow",
+		size: 82,
 	},
 ];
 
@@ -51,7 +71,7 @@ export default function FolderPage() {
 								backgroundSize: "32px 32px",
 							}}
 						/>
-						<FolderFrame className="relative z-10" size={220} />
+						<FolderFrame className="relative z-10" motion="peek" size={220} />
 					</div>
 
 					<aside className="flex min-w-0 flex-col justify-between gap-10 rounded-lg border border-[#a1b3c333] bg-[#050505] p-6">
@@ -60,7 +80,7 @@ export default function FolderPage() {
 								SOURCE SIZE
 							</p>
 							<div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
-								<FolderFrame />
+								<FolderFrame motion="none" />
 								<p className="text-[#f4f4f4] text-left text-sm font-bold leading-5 tracking-[0.08em] sm:text-right">
 									120 x 136
 									<br />
@@ -69,13 +89,33 @@ export default function FolderPage() {
 							</div>
 						</div>
 
-						<ul className="grid grid-cols-1 items-end gap-8 sm:grid-cols-3 sm:gap-4">
-							{folderVariants.map((folder) => (
-								<li className="flex min-w-0 justify-center" key={folder.label}>
-									<FolderFrame label={folder.label} size={folder.size} />
-								</li>
-							))}
-						</ul>
+						<div className="flex flex-col gap-5">
+							<p className="text-[#a1b3c3] text-xs font-bold leading-4 tracking-[0.18em]">
+								MOTION STUDIES
+							</p>
+							<ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+								{motionOptions.map((folder) => (
+									<li
+										className="folder-motion-card flex min-w-0 flex-col items-center gap-3 border-[#a1b3c333] border-t pt-5 text-center first:border-t-0 first:pt-0 sm:border-t-0 sm:pt-0"
+										key={folder.motion}
+									>
+										<FolderFrame
+											label={folder.label}
+											motion={folder.motion}
+											size={folder.size}
+										/>
+										<div className="flex min-w-0 flex-col gap-1">
+											<p className="text-[#f4f4f4] text-sm font-bold leading-5 tracking-[0.08em]">
+												{folder.label}
+											</p>
+											<p className="text-[#a1b3c3] text-xs font-bold leading-4 tracking-[0.12em] uppercase">
+												{folder.meta}
+											</p>
+										</div>
+									</li>
+								))}
+							</ul>
+						</div>
 					</aside>
 				</section>
 			</div>
