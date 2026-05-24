@@ -1,10 +1,17 @@
-import type { CSSProperties } from "react";
+import type { ComponentType, CSSProperties, SVGProps } from "react";
 
-export type FolderFrameMotion = "none" | "lift" | "peek" | "tilt" | "glow";
+export type FolderFrameMotion = "none" | "lift" | "peek" | "tilt";
+
+type FolderFrameIconProps = SVGProps<SVGSVGElement> & {
+	size?: number | string;
+	strokeWidth?: number | string;
+};
 
 type FolderFrameProps = {
 	className?: string;
 	folderColor?: string;
+	icon?: ComponentType<FolderFrameIconProps>;
+	iconColor?: string;
 	label?: string;
 	labelColor?: string;
 	motion?: FolderFrameMotion;
@@ -16,11 +23,13 @@ type FolderFrameProps = {
 export function FolderFrame({
 	className,
 	folderColor = "#A1B3C3",
+	icon: Icon,
+	strokeColor = "#FFFFFF",
+	iconColor = strokeColor,
 	label = "Projects",
 	labelColor = folderColor,
 	motion = "lift",
 	size = 120,
-	strokeColor = "#FFFFFF",
 	style,
 }: FolderFrameProps) {
 	const wrapperStyle = {
@@ -54,12 +63,26 @@ export function FolderFrame({
 					fill={folderColor}
 					stroke={strokeColor}
 				/>
-				<path
-					className="folder-frame__front"
-					d="M69 15.5C71.485 15.5 73.5 17.515 73.5 20V64C73.5 66.485 71.485 68.5 69 68.5H5C2.515 68.5 0.5 66.485 0.5 64V20C0.5 17.515 2.515 15.5 5 15.5H69Z"
-					fill={folderColor}
-					stroke={strokeColor}
-				/>
+				<g className="folder-frame__face">
+					<path
+						className="folder-frame__front"
+						d="M69 15.5C71.485 15.5 73.5 17.515 73.5 20V64C73.5 66.485 71.485 68.5 69 68.5H5C2.515 68.5 0.5 66.485 0.5 64V20C0.5 17.515 2.515 15.5 5 15.5H69Z"
+						fill={folderColor}
+						stroke={strokeColor}
+					/>
+					{Icon ? (
+						<Icon
+							aria-hidden="true"
+							className="folder-frame__icon"
+							height={20}
+							strokeWidth={2.2}
+							style={{ color: iconColor }}
+							width={20}
+							x={27}
+							y={32}
+						/>
+					) : null}
+				</g>
 			</svg>
 			<figcaption
 				className="folder-frame__label w-fit text-center text-xs font-bold leading-4 tracking-[0.15em]"

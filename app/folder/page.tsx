@@ -1,3 +1,4 @@
+import { Mail } from "lucide-react";
 import type { Metadata } from "next";
 
 import {
@@ -34,12 +35,6 @@ const motionOptions: Array<{
 		motion: "tilt",
 		size: 82,
 	},
-	{
-		label: "Glow",
-		meta: "shadow",
-		motion: "glow",
-		size: 82,
-	},
 ];
 
 export default function FolderPage() {
@@ -71,7 +66,13 @@ export default function FolderPage() {
 								backgroundSize: "32px 32px",
 							}}
 						/>
-						<FolderFrame className="relative z-10" motion="peek" size={220} />
+						<FolderFrame
+							className="relative z-10"
+							icon={Mail}
+							label="Inbox"
+							motion="peek"
+							size={220}
+						/>
 					</div>
 
 					<aside className="flex min-w-0 flex-col justify-between gap-10 rounded-lg border border-[#a1b3c333] bg-[#050505] p-6">
@@ -80,7 +81,7 @@ export default function FolderPage() {
 								SOURCE SIZE
 							</p>
 							<div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
-								<FolderFrame motion="none" />
+								<FolderFrame icon={Mail} label="Inbox" motion="none" />
 								<p className="text-[#f4f4f4] text-left text-sm font-bold leading-5 tracking-[0.08em] sm:text-right">
 									120 x 136
 									<br />
@@ -100,6 +101,7 @@ export default function FolderPage() {
 										key={folder.motion}
 									>
 										<FolderFrame
+											icon={folder.motion === "peek" ? Mail : undefined}
 											label={folder.label}
 											motion={folder.motion}
 											size={folder.size}
